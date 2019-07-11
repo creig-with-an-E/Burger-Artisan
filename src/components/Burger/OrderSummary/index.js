@@ -2,11 +2,12 @@ import React from "react"
 import Aux from "../../../HOC/Aux"
 import Button from "../../common/Button"
 
-const orderSummary = (props)=>{
+const orderSummary =props=>{ 
   const summary = Object.keys(props.ingredients)                
-                      .map(igKey=>{ 
-                        return <li key={igKey}><span style={{textTransform:"capitalize"}}>{igKey}</span>: {props.ingredients[igKey]}</li>
-                      })
+  .map(igKey=>{ 
+    return <li key={igKey}><span style={{textTransform:"capitalize"}}>{igKey}</span>: {props.ingredients[igKey]}</li>
+  })
+
   return(
     <Aux>
       <h3>Your Order</h3>
