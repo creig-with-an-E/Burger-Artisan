@@ -2,6 +2,7 @@
   serves as the wrapper for the entire app
 */
 import React from "react";
+
 import Aux from "../../HOC/Aux";
 import Toolbar from "../../navigation/toolbar";
 import SideDrawer from "../../navigation/SideDrawer";

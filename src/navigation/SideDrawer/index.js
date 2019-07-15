@@ -10,7 +10,6 @@ const sideDrawer = (props) => {
   if(props.visible){
     attachedClasses =[classes.SideDrawer,classes.Open]
   }
-  console.log(attachedClasses.join(" "))
   return (
     <Aux>
       <Backdrop show={props.visible} click={props.toggleSideDrawer}/>

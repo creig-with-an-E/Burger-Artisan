@@ -9,7 +9,6 @@ class modal extends React.Component{
   }
 
   componentDidMount(){
-    console.log(`Modal will mount`)
   }
   render(){
   const modalDisplay = this.props.show ? {transform: "translateY(0)", opacity:1}: {transform: "translateY(-100vh)", opacity: 0}
