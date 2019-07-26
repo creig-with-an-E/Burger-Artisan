@@ -4,8 +4,8 @@ import axios from "../../axios-orders"
 import withErrorHandler from "../../HOC/withErrorHandler"
 
 //redux
-import {connect} from "react-redux"
-import {fetchOrders} from "../../store/actions/order"
+import { connect } from "react-redux"
+import { fetchOrders } from "../../store/actions/order"
 
 import Spinner from "../../components/common/Spinner"
 
@@ -18,7 +18,9 @@ class Orders extends Component {
 
     componentDidMount(){
       //fetching orders using redux
-      this.props.onInitOrders()
+      const {userId, token} = this.props
+      console.log(userId)
+      this.props.onInitOrders(token,userId)
     }
     render() {
       let orders = <Spinner />
@@ -43,13 +45,16 @@ class Orders extends Component {
 const mapStateToProps =(state)=>{
   return {
     orders: state.order.orders,
-    loading: state.order.loading
+    loading: state.order.loading,
+    token: state.auth.token,
+    userId: state.auth.userId
   }
 }
 
 const mapDispatchToProps =(dispatch)=>{
   return {
-    onInitOrders : ()=>dispatch(fetchOrders())
+    onInitOrders : (token, userId)=>dispatch(fetchOrders(token,userId))
+    // token is passed to annonymous function then passed down to fetch orders
   }
 }
 

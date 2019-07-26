@@ -2,7 +2,7 @@
   serves as the wrapper for the entire app
 */
 import React from "react";
-
+import {connect} from "react-redux"
 import Aux from "../../HOC/Aux";
 import Toolbar from "../../navigation/toolbar";
 import SideDrawer from "../../navigation/SideDrawer";
@@ -27,12 +27,18 @@ class Layout extends React.Component {
   render() {
     return (
       <Aux>
-        <Toolbar drawerToggleClicked={this.sideDrawerToggleHandler}/>
-        <SideDrawer visible={this.state.showSideDrawer} toggleSideDrawer={this.sideDrawerClosedHandler}/>
+        <Toolbar isAuthenticated={this.props.isAuthenticated} drawerToggleClicked={this.sideDrawerToggleHandler}/>
+        <SideDrawer isAuthenticated={this.props.isAuthenticated} visible={this.state.showSideDrawer} toggleSideDrawer={this.sideDrawerClosedHandler}/>
         <main className={classes.Content}>{this.props.children}</main>
       </Aux>
     );
   }
 }
 
-export default Layout;
+const mapStateToProps =(state)=>{
+  return {
+    isAuthenticated: state.auth.token !== null
+  }
+}
+
+export default connect(mapStateToProps, null)(Layout)
