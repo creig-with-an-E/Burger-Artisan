@@ -1,11 +1,13 @@
-## React application: Build your own burger
+### Burger Artisan 
 
-### Running application
+#### What is it ?
+- Web application allowing user to create their custom burger step by step.
 
-<code>npm install</code>
+#### Technologies and Languages
+- React | Redux | React-Router ...
 
+#### Running application
+- the following steps assume you have cloned the repo.
 
-#### Project description
-- Build your customer burger with a sophisticated UI while you keep track of price and nutritional benefits [future feature]
-
-- created using <code>npx create-react-app</code>
+- <code>yarn</code> to install project relevant dependencies
+- <code>yarn start</code> to start react application
