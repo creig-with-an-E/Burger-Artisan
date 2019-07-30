@@ -19,7 +19,6 @@ class Orders extends Component {
     componentDidMount(){
       //fetching orders using redux
       const {userId, token} = this.props
-      console.log(userId)
       this.props.onInitOrders(token,userId)
     }
     render() {
@@ -36,6 +35,7 @@ class Orders extends Component {
       }
         return (
           <div>
+            <h1 style={{textAlign:"center"}}>Previous Orders</h1>
             {orders}
           </div>
         );

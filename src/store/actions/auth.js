@@ -35,7 +35,6 @@ export const auth=(email, password)=>{
     password: password,
     returnSecureToken: true
   }
-  // axios.post("https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=AIzaSyCxKF1i9Y5ZpePYHC-Xp2mkTSocGsyDMHU",authData)
   axios.post(`https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=${process.env.REACT_APP_FIREBASE_WEB_API}`,authData)
     .then(response=>{
         const expDate = new Date(new Date().getTime() + response.data.expiresIn * 1000)
