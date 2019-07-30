@@ -36,7 +36,7 @@ export const auth=(email, password)=>{
     returnSecureToken: true
   }
   // axios.post("https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=AIzaSyCxKF1i9Y5ZpePYHC-Xp2mkTSocGsyDMHU",authData)
-  axios.post("https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=AIzaSyCxKF1i9Y5ZpePYHC-Xp2mkTSocGsyDMHU",authData)
+  axios.post(`https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=${process.env.REACT_APP_FIREBASE_WEB_API}`,authData)
     .then(response=>{
         const expDate = new Date(new Date().getTime() + response.data.expiresIn * 1000)
         //expiry date is calculated. but needs to be converted to date again
@@ -47,7 +47,7 @@ export const auth=(email, password)=>{
         dispatch(checkAuthTimeout(response.data.expiresIn* 100))
     })
     .catch(error=>{
-        dispatch(authFail(error.message))
+        dispatch(authFail("Please verify password and email"))
     })
   }
 }
@@ -104,7 +104,7 @@ export const register=(email, password)=>{
       password: password,
       returnSecureToken: true
     }
-    axios.post("https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=AIzaSyCxKF1i9Y5ZpePYHC-Xp2mkTSocGsyDMHU",authData)
+    axios.post(`https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=${process.env.REACT_APP_FIREBASE_WEB_API}`,authData)
       .then(response=>{
           const expDate = new Date(new Date().getTime() + response.data.expiresIn * 1000)
           //expiry date is calculated. but needs to be converted to date again
