@@ -22,6 +22,10 @@ const asyncAuth = asyncComponent(()=>{
   return import('./containers/Auth')
 })
 
+const asyncRegister = asyncComponent(()=>{
+  return import('./containers/Auth/register')
+})
+
 class App extends React.Component{
   logout=()=>{
     console.log("App.js calling logout")
@@ -36,6 +40,7 @@ class App extends React.Component{
       <Switch>
         <Route path="/" exact component={BurgerBuilder} />
         <Route path="/auth" component={asyncAuth} />
+        <Route path="/register" component={asyncRegister} />
         <Redirect to="/" />
       </Switch>
     )
@@ -47,9 +52,9 @@ class App extends React.Component{
           <Route path="/checkout"  component={asyncCheckout} />
           <Route path="/orders" component={asyncOrders}/>
           <Route path="/auth" component={asyncAuth} />
+          <Route path="/register" component={asyncRegister} />          
           <Route path="/logout" render={()=>this.logout()} /> 
           <Redirect to="/" />
-
         </Switch>
 
       )

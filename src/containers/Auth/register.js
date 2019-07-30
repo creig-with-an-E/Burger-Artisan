@@ -7,7 +7,7 @@ import Spinner from "../../components/common/Spinner"
 import classes from "./Auth.module.css"
 import * as actions from "../../store/actions/auth"
 
-class Auth extends Component {
+class Register extends Component {
   state ={
   controls:{
     email:{
@@ -40,8 +40,25 @@ class Auth extends Component {
     valid: false,
     touched: false //checks if used has touched the field
     },
+
+    // confirm password control
+    confirmPassword:{
+      elementType:"input",
+      elementConfig:{
+        type: "password",
+        placeholder:"Confirm Passsword"
+      },
+      value:"",
+      validation:{
+        required: true,
+        minLength: 6,
+        passwordConfirmField: true 
+      },
+      valid: false,
+      touched: false //checks if used has touched the field
+      },
   },
-  isValid: null
+  isValid : false
   } 
   
   componentDidMount(){
@@ -53,7 +70,7 @@ class Auth extends Component {
   submitHandler=(event)=>{
     event.preventDefault()
     const {email, password} = this.state.controls
-    this.props.onAuth(email.value,password.value )
+    this.props.onRegister(email.value,password.value )
   }
 
   checkValidity(value, rules) {
@@ -83,23 +100,28 @@ class Auth extends Component {
       const pattern = /^\d+$/;
       isValid = pattern.test(value) && isValid
     }
-
+    if(rules.passwordConfirmField){
+        isValid = (value === this.state.controls.password.value) && isValid
+    }
     return isValid;
 }
 
   inputChangedHandler=(event, controlName)=>{
-  const updatedControls = {
+    const isValidProperty = this.checkValidity(event.target.value,this.state.controls[controlName].validation)
+    const updatedControls = {
     ...this.state.controls,
     [controlName]:{
     ...this.state.controls[controlName],
     value: event.target.value,
-    valid: this.checkValidity(event.target.value,this.state.controls[controlName].validation),
+    // valid: this.checkValidity(event.target.value,this.state.controls[controlName].validation),
+    valid: isValidProperty,
     touched: true
-    },
+    }
   }
 
   this.setState({
-    controls: updatedControls
+    controls: updatedControls,
+    isValid: isValidProperty
   })
   }
 
@@ -116,7 +138,7 @@ class Auth extends Component {
         return <Input elementType={el.config.elementType} elementConfig={el.config.elementConfig}
             key={el.id} value={el.config.value} changed={(event)=>this.inputChangedHandler(event,el.id)}
             invalid={!el.config.valid} shouldValidate={el.config.validation}
-            touched={el.config.touched}
+            touched={el.config.touched} passwordConfirmField={el.config.validation.passwordConfirmField}
             />
       })
   )
@@ -124,9 +146,11 @@ class Auth extends Component {
   if(this.props.loading){
     form = <Spinner />
   }
-  const showButton = (this.state.controls.email.valid && this.state.controls.password.valid)
+
   let errorMessage = this.props.error ? <p style={{color: "red"}}>{this.props.error}</p> :  ""
-    // if authenticated user is redirected
+  const {password, confirmPassword} = this.state.controls
+  const disableButton = (password.value === confirmPassword.value) && (password.value !== "") && (confirmPassword.value !== "")
+  // if authenticated user is redirected
     if(this.props.authenticated){
         return <Redirect to={this.props.authRedirect} />
       }else{
@@ -134,10 +158,11 @@ class Auth extends Component {
           <div className={classes.Auth}>
           <form onSubmit={this.submitHandler}>
           {form}
+          <Button disabled={!disableButton} buttonType="Success" >Create Account</Button>
           {errorMessage}
-          <Button disabled={!showButton} buttonType="Success" >Login</Button>
           </form>
-          <NavLink style={{textDecoration: "none"}} to="/register"><Button buttonType="Danger">New User ?</Button></NavLink>
+          {/* <Button buttonType="Danger" click={}>Returning User </Button> */}
+          <NavLink style={{textDecoration: "none"}} to="/auth"><Button buttonType="Danger">Returning user?</Button></NavLink>         
           </div> );
       }
     }
@@ -155,9 +180,9 @@ const mapStateToProps =(state)=>{
 
 const mapDispatchToProps=(dispatch)=>{
   return{
-    onAuth:(email, password)=>dispatch(actions.auth(email,password)),
+    onRegister:(email, password)=>dispatch(actions.register(email,password)),
     onSetAuthRedirect: ()=>dispatch(actions.setAuthRedirect("/"))
   }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(Auth);
+export default connect(mapStateToProps, mapDispatchToProps)(Register);

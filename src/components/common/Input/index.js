@@ -6,7 +6,13 @@ const input =(props)=>{
   let validationError = ""
   if(props.invalid && props.shouldValidate && props.touched){
     inputClasses.push(classes.Invalid)
+    if(props.passwordConfirmField){
+      //passsing different error message for password confirm field
+      validationError =<p style={{color: "red"}}>Passwords do match</p>
+    }else{
     validationError =<p style={{color: "red"}}>Please enter valid {props.elementConfig.type}</p>
+
+    }
   }
   let inputElement = null
   switch(props.elementType){

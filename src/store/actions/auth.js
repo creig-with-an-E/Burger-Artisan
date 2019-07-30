@@ -95,3 +95,36 @@ export const authCheckState =()=>{
     }
   }
 }
+
+export const register=(email, password)=>{
+  return (dispatch)=>{
+    dispatch(authStart())
+    const authData = {
+      email: email,
+      password: password,
+      returnSecureToken: true
+    }
+    axios.post("https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=AIzaSyCxKF1i9Y5ZpePYHC-Xp2mkTSocGsyDMHU",authData)
+      .then(response=>{
+          const expDate = new Date(new Date().getTime() + response.data.expiresIn * 1000)
+          //expiry date is calculated. but needs to be converted to date again
+          localStorage.setItem("token",response.data.idToken)
+          localStorage.setItem("expirationDate",expDate)
+          localStorage.setItem("userId",response.data.localId)
+          dispatch(registrationSuccess(response.data))
+      })
+      .catch(error=>{
+          dispatch(authFail(error.message))
+      })
+    }
+}
+
+const registrationSuccess =(authData)=>{
+  return {
+    type: actionType.AUTH_SUCCESS,
+    payload:{
+      token: authData.idToken,
+      userId: authData.localId
+    }
+  }
+}
