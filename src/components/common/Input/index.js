@@ -8,9 +8,9 @@ const input =(props)=>{
     inputClasses.push(classes.Invalid)
     if(props.passwordConfirmField){
       //passsing different error message for password confirm field
-      validationError =<p style={{color: "red"}}>Passwords do match</p>
+      validationError =<p style={{color: "#bb0000"}}>Passwords do not match</p>
     }else{
-    validationError =<p style={{color: "red"}}>Please enter valid {props.elementConfig.type}</p>
+    validationError =<p style={{color: "#bb0000"}}>Please enter valid {props.elementConfig.type}</p>
 
     }
   }

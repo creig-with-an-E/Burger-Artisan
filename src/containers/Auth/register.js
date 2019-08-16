@@ -147,7 +147,7 @@ class Register extends Component {
     form = <Spinner />
   }
 
-  let errorMessage = this.props.error ? <p style={{color: "red"}}>{this.props.error}</p> :  ""
+  let errorMessage = this.props.error ? <p style={{color: "#f50"}}>{this.props.error}</p> :  ""
   const {password, confirmPassword} = this.state.controls
   const disableButton = (password.value === confirmPassword.value) && (password.value !== "") && (confirmPassword.value !== "")
   // if authenticated user is redirected

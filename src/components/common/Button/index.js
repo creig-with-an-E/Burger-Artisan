@@ -6,7 +6,7 @@ const button =(props)=>{
     return(
       <button disabled={props.disabled}className={classNames} 
         onClick={props.click}>
-        {props.children}
+        <span style={{alignText:"center", paddingLeft:5}}>{props.children}</span>
       </button>)
 }
 

@@ -137,7 +137,7 @@ class Auth extends Component {
           {errorMessage}
           <Button disabled={!showButton} buttonType="Success" >Login</Button>
           </form>
-          <NavLink style={{textDecoration: "none"}} to="/register"><Button buttonType="Danger">New User ?</Button></NavLink>
+          <NavLink style={{textDecoration: "none",}} to="/register"><Button buttonType="Danger">New User?</Button></NavLink>
           </div> );
       }
     }

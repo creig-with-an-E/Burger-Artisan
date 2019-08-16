@@ -28,7 +28,6 @@ const asyncRegister = asyncComponent(()=>{
 
 class App extends React.Component{
   logout=()=>{
-    console.log("App.js calling logout")
     this.props.logout()
     return <Redirect to="/auth" />
   }

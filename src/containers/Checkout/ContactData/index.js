@@ -190,7 +190,7 @@ class ContactData extends React.Component {
     }
   return (
     <div className={classes.CheckoutData}>
-      <h4>Enter your contact data</h4>
+      <h4>Enter your contact details</h4>
         {form}
     </div>);
   }
