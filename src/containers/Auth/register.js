@@ -8,6 +8,10 @@ import classes from "./Auth.module.css"
 import * as actions from "../../store/actions/auth"
 
 class Register extends Component {
+  constructor(props){
+    super(props)
+    this.props.clearErrors()  //resets errors
+  }
   state ={
   controls:{
     email:{
@@ -158,8 +162,8 @@ class Register extends Component {
           <div className={classes.Auth}>
           <form onSubmit={this.submitHandler}>
           {form}
-          <Button disabled={!disableButton} buttonType="Success" >Create Account</Button>
           {errorMessage}
+          <Button disabled={!disableButton} buttonType="Success" >Create Account</Button>
           </form>
           {/* <Button buttonType="Danger" click={}>Returning User </Button> */}
           <NavLink style={{textDecoration: "none"}} to="/auth"><Button buttonType="Danger">Returning user?</Button></NavLink>         
@@ -181,7 +185,8 @@ const mapStateToProps =(state)=>{
 const mapDispatchToProps=(dispatch)=>{
   return{
     onRegister:(email, password)=>dispatch(actions.register(email,password)),
-    onSetAuthRedirect: ()=>dispatch(actions.setAuthRedirect("/"))
+    onSetAuthRedirect: ()=>dispatch(actions.setAuthRedirect("/")),
+    clearErrors:()=>dispatch(actions.clearErrors())
   }
 }
 

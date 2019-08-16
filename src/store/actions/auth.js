@@ -128,3 +128,9 @@ const registrationSuccess =(authData)=>{
     }
   }
 }
+
+export const clearErrors=()=>{
+  return {
+    type: actionType.CLEAR_ERRORS
+  }
+}

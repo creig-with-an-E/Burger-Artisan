@@ -22,6 +22,8 @@ const reducer =(state=INITIAL_STATE, action)=>{
       return {...state,token: null, userId: null}
     case actionTypes.SET_AUTH_REDIRECT:
       return {...state, authRedirectPath:action.payload.path}
+    case actionTypes.CLEAR_ERRORS:
+      return {...state, error: ""}
     default: 
       return state
   }

@@ -18,3 +18,5 @@ export const AUTH_FAIL = "authentication_fail"
 export const LOGOUT = "auth_logout"
 
 export const SET_AUTH_REDIRECT = "set_auth_redirect"
+
+export const CLEAR_ERRORS = "clear_errors"
