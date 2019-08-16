@@ -61,9 +61,9 @@ class ContactData extends React.Component {
         value:"",
         validation: {
           required: true,
-          minLength: 5,
-          maxLength: 5,
-          isNumeric: true
+          minLength: 6,
+          maxLength: 6,
+          isNumeric: false
       },
         valid: false,
         touched: false //checks if used has touched the field
@@ -78,7 +78,7 @@ class ContactData extends React.Component {
         validation:{
           required: true,
           minLength:3,
-          maxLength:5
+          // maxLength:5
         },
         valid: false,
         touched: false //checks if used has touched the field

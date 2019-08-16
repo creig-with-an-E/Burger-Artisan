@@ -24,12 +24,12 @@ const input =(props)=>{
       inputElement= <textArea className={inputClasses.join(" ")} {...props}  onChange={props.changed}/>
       break
     case "select":
-      return inputElement = (<select className={inputClasses.join(" ")}
+      return inputElement = (<span><select className={inputClasses.join(" ")}
                     value={props.value} onChange={props.changed}>
                       {props.elementConfig.options.map(opt=>{
                           return <option  value={opt.value} key={opt.value}>{opt.displayValue}</option>
                       })}
-                    </select>)
+                    </select></span>)
     default:
       inputElement= <input className={classes.InputElement} {...props}/>
   }

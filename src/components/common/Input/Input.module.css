@@ -29,3 +29,9 @@
     border: 1px solid red;
     background-color: salmon
 }
+
+select {
+    margin-top: 15px;
+    padding: 10px;
+    width: 80%
+}
