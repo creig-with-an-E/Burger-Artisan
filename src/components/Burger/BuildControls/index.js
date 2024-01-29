@@ -28,8 +28,6 @@ const buildControls =props =>{
               />
           )})
       }
-      <button className={classes.OrderButton} disabled={!props.purchasable} 
-        onClick={props.purchaseHandler}>{props.isAuthenticated ? "ORDER NOW" : "SIGNUP TO CONTINUE"}</button>
     </div>
   )
 }
