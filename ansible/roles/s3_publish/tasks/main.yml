@@ -1,0 +1,31 @@
+---
+
+- name: Get unix timestamp
+  set_fact: deploy_timestamp="{{ansible_date_time.epoch}}"
+
+- name: Show timestamp
+  debug:
+    var: deploy_timestamp
+
+- name: Upload to versioned path
+  s3_sync:
+    aws_access_key: '{{ aws_access_key }}'
+    aws_secret_key: '{{ aws_secret_key }}'
+    bucket: '{{ s3_bucket }}'
+    file_root: '{{ansible_temp}}/{{repo_name}}/build'
+    key_prefix: '{{ deploy_timestamp }}'
+
+- name: Upload to public path
+  s3_sync:
+    aws_access_key: '{{ aws_access_key }}'
+    aws_secret_key: '{{ aws_secret_key }}'
+    bucket: '{{ s3_bucket }}'
+    file_root: '{{ansible_temp}}/{{repo_name}}/build'
+    key_prefix: 'public'
+
+- name: Invalidate cdn
+  cloudfront_invalidation:
+    aws_access_key: '{{ aws_access_key }}'
+    aws_secret_key: '{{ aws_secret_key }}'
+    distribution_id: '{{ aws_cdf_distro_id }}'
+    target_paths: ['/*']

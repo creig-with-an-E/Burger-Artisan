@@ -1,0 +1,11 @@
+---
+- name: Create temp dir
+  file: path={{ansible_temp}} state=directory mode=0755
+
+- name: Check for fresh repo source
+  file:
+    path: '{{ ansible_temp }}/{{ repo_name }}'
+    state: absent
+
+- name: Fetch git upstream
+  git: repo={{ repo_base }}/{{repo_name}}.git dest={{ansible_temp}}/{{repo_name}} version={{repo_version}} accept_hostkey=True

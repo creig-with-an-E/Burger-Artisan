@@ -1,0 +1,14 @@
+---
+all:
+  vars:
+    aws_access_key: '{{ vault_aws_access_key }}'
+    aws_secret_key: '{{ vault_aws_secret_access_key }}'
+    aws_region: 'us-west-1'
+    aws_cdf_domain: 'https://d3lruxcil90arw.cloudfront.net'
+    aws_cdf_distro_id: 'EFJHCNSH6N0UK'
+    s3_bucket: 'burger-bulder-react-app'
+  
+  hosts:
+    localhost:
+      ansible_connection: local
+      ansible_python_interpreter: python3

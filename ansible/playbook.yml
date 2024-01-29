@@ -1,0 +1,16 @@
+---
+
+- name: Fetch from upstream
+  hosts: localhost
+  roles:
+    - localize_sources
+
+- name: Build react app
+  hosts: localhost
+  roles:
+    - build
+
+- name: Upload build to s3
+  hosts: localhost
+  roles:
+    - s3_publish

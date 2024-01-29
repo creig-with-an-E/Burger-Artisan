@@ -1,0 +1,5 @@
+---
+ansible_temp: '/tmp/project-deploy-workspace'
+repo_base: 'git@github.com:creig-with-an-e'
+repo_name: 'Burger-Artisan'
+repo_version: 'master'

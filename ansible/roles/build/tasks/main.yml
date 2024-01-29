@@ -1,0 +1,20 @@
+---
+- name: Install node modules
+  yarn:
+    path: '{{ansible_temp}}/{{repo_name}}'
+    state: present
+
+- name: Display cloudfront domain
+  ansible.builtin.debug:
+    var: aws_cdf_domain
+
+- name: Update public index file
+  template:
+    src: 'index.html.j2'
+    dest: '{{ansible_temp}}/{{repo_name}}/public/index.html'
+    force: true
+
+- name: Run yarn build
+  command:
+    chdir: '{{ansible_temp}}/{{repo_name}}'
+    cmd: 'yarn run build'
